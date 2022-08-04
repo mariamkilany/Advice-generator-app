@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [solution URL](https://your-solution-url.com)
+- Solution URL: [solution URL](https://www.frontendmentor.io/solutions/advice-generator-app-gPKPHL-xwZ)
 - Live Site URL: [live site URL ](https://advice-generator-app-sooty-delta.vercel.app/)
 
 ### Built with
