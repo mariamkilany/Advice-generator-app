@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Advice generator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; margin-top: 20px; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+    html{
+      height: 100vh;
+    }
+    body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #202632;
+    font-family: 'Manrope', sans-serif;
+    }
+    .advCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 444px;
+    /* max-width: 444px; */
+    text-align: center;
+    padding: 50px;
+    /* margin: -3px; */
+    height: fit-content;
+    justify-content: space-between;
+    background-color: hsl(218deg 20% 24%);
+    color: hsl(201deg 17% 70%);
+    position: relative;
+    font-weight: 800;
+    border-radius: 15px;
+    overflow-x: clip;
+    }
+    .out{
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: hsl(150, 100%, 66%);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .out:hover{
+    box-shadow:0px 0px 13px 8px hsl(150deg 100% 66% / 60%);
+  }
+  .id{
+    color: hsl(150, 100%, 66%);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+  }
+  .advTxt{
+    font-size: 28px;
+    padding: 20px;
+  }
+  @media only screen and ( max-width : 500px ) {
+    .advCard{
+      width: 240px;
+    }
+    .line{
+      overflow-x: hidden;
+    }
+  }
+  .con{
+    position: relative;
+  }
+  </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="con">
+  <div class="advCard">
+    <div class="id">advice #<span></span> </div>
+    <div class="advTxt"></div>
+    <div class="line">
+    <svg width="444" height="16" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="#4F5D74" d="M0 8h196v1H0zM248 8h196v1H248z"/><g transform="translate(212)" fill="#CEE3E9"><rect width="6" height="16" rx="3"/><rect x="14" width="6" height="16" rx="3"/></g></g></svg>
+    </div>
+    </div>
+    <div class="out"><svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 0H4a4.005 4.005 0 0 0-4 4v16a4.005 4.005 0 0 0 4 4h16a4.005 4.005 0 0 0 4-4V4a4.005 4.005 0 0 0-4-4ZM7.5 18a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" fill="#202733"/></svg></div>
+  </div>
+  <script>
+    //Get Advice
+    let jasonReq=new XMLHttpRequest();
+    jasonReq.open("GET","https://api.adviceslip.com/advice");
+    jasonReq.send();
+  console.log(jasonReq);
+  jasonReq.onreadystatechange=function(){
+    if(this.readyState===4&&this.status===200){
+      
+      document.querySelector(".advTxt").appendChild(document.createTextNode(`" ${JSON.parse(jasonReq.response).slip.advice}"`));
+      document.querySelector(".id span").appendChild(document.createTextNode(JSON.parse(jasonReq.response).slip.id))
+    }
+  }
+  //New advice
+  let btn=document.querySelector(".out");
+  btn.onclick=function(){
+    window.location.reload();
+  }
+  </script>
+</body>
+</html>
